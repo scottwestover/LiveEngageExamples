@@ -10,7 +10,7 @@ import json
 from requests_oauthlib import OAuth1
 from requests_oauthlib import OAuth1Session
 
-
+# Plug in your Base URI, Account Number and OAuth Key Details below
 baseURI = 'https://{YOUR BASE URI}/api/account/{YOUR ACCOUNT NUMBER}/external/engagement'
 consumer_key = 'your consumer key'
 consumer_secret = 'your consumer secret'
@@ -35,21 +35,12 @@ def send_request():
 
     # Attributes and skills (consumerSections) go here
     body={
-            "appType": "IVR",
-            "consumerSections": [
-                "General"
-            ],
-            "engagementAttributes": [
-                {
-                    "type": "personal",
-                    "personal": {
-                        "contacts": {
-                            "phone": "1001001001"
-                        }
-                    }
-                }
-            ],
-            "externalWaitTime": "300"
+        "appType": "IVR",
+        "consumerSections": ["General"],
+        "engagementAttributes": [
+        {"type":"personal","personal":{"contacts":{"phone":"1001001001"}}}
+        ],
+        "externalWaitTimeSeconds":300
     }
 
     response = client.post(url=baseURI, headers=postheader, data=json.dumps(body), auth=oauth, params=urlparams)
